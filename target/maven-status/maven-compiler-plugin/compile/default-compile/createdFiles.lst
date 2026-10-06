@@ -1,0 +1,17 @@
+com\deportivo\app\controller\EntrenadorController.class
+com\deportivo\app\repository\JugadorRepository.class
+com\deportivo\app\repository\CompeticionRepository.class
+com\deportivo\app\model\Entrenador.class
+com\deportivo\app\model\Asociacion.class
+com\deportivo\app\controller\CompeticionController.class
+com\deportivo\app\repository\ClubRepository.class
+com\deportivo\app\repository\EntrenadorRepository.class
+com\deportivo\app\controller\JugadorController.class
+com\deportivo\app\controller\ClubController.class
+com\deportivo\app\model\Competicion.class
+com\deportivo\app\repository\AsociacionRepository.class
+com\deportivo\app\model\Club.class
+com\deportivo\app\model\Jugador.class
+com\deportivo\app\controller\HomeController.class
+com\deportivo\app\controller\AsociacionController.class
+com\deportivo\app\DeportivoApplication.class
