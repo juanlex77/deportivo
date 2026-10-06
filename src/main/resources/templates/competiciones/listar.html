@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Competiciones - Deportivo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">⚽ Deportivo</a>
+            <div class="navbar-nav">
+                <a class="nav-link" th:href="@{/clubes}">Clubes</a>
+                <a class="nav-link" th:href="@{/entrenadores}">Entrenadores</a>
+                <a class="nav-link" th:href="@{/jugadores}">Jugadores</a>
+                <a class="nav-link" th:href="@{/asociaciones}">Asociaciones</a>
+                <a class="nav-link active" th:href="@{/competiciones}">Competiciones</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container mt-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>🏆 Lista de Competiciones</h2>
+            <a th:href="@{/competiciones/crear}" class="btn btn-success">
+                ➕ Nueva Competición
+            </a>
+        </div>
+
+        <!-- Mensaje si no hay registros -->
+        <div th:if="${#lists.isEmpty(competiciones)}" class="alert alert-info">
+            No hay competiciones registradas todavía.
+        </div>
+
+        <!-- Tabla de competiciones -->
+        <table class="table table-striped table-hover" th:unless="${#lists.isEmpty(competiciones)}">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Monto del Premio</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="competicion, iter : ${competiciones}">
+                    <td th:text="${iter.count}"></td>
+                    <td>
+                        <strong th:text="${competicion.nombre}"></strong>
+                    </td>
+                    <td>
+                        <span class="badge bg-success"
+                              th:text="'$' + ${#numbers.formatInteger(competicion.montoPremio, 3, 'POINT')}"></span>
+                    </td>
+                    <td th:text="${competicion.fechaInicio}"></td>
+                    <td th:text="${competicion.fechaFin}"></td>
+                    <td>
+                        <a th:href="@{/competiciones/editar/{id}(id=${competicion.id})}"
+                           class="btn btn-warning btn-sm">✏️ Editar</a>
+
+                        <a th:href="@{/competiciones/eliminar/{id}(id=${competicion.id})}"
+                           class="btn btn-danger btn-sm btn-eliminar"
+                           th:attr="data-nombre=${competicion.nombre}">
+                           🗑️ Eliminar
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/}" class="btn btn-secondary mt-3">⬅️ Volver al Inicio</a>
+    </div>
+
+    <!-- Scripts -->
+    <script th:src="@{/js/scripts.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

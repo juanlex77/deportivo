@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Asociación - Deportivo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">⚽ Deportivo</a>
+            <div class="navbar-nav">
+                <a class="nav-link" th:href="@{/clubes}">Clubes</a>
+                <a class="nav-link" th:href="@{/entrenadores}">Entrenadores</a>
+                <a class="nav-link" th:href="@{/jugadores}">Jugadores</a>
+                <a class="nav-link active" th:href="@{/asociaciones}">Asociaciones</a>
+                <a class="nav-link" th:href="@{/competiciones}">Competiciones</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="form-container">
+            <h2 class="mb-4">➕ Crear Asociación</h2>
+
+            <form th:action="@{/asociaciones/guardar}" th:object="${asociacion}" method="post">
+
+                <div class="mb-3">
+                    <label class="form-label">Nombre:</label>
+                    <input type="text" class="form-control" th:field="*{nombre}"
+                           placeholder="Ej: UEFA" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">País:</label>
+                    <input type="text" class="form-control" th:field="*{pais}"
+                           placeholder="Ej: Europa" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Presidente:</label>
+                    <input type="text" class="form-control" th:field="*{presidente}"
+                           placeholder="Ej: Aleksander Ceferin" required>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a th:href="@{/asociaciones}" class="btn btn-secondary">⬅️ Cancelar</a>
+                    <button type="submit" class="btn btn-primary">💾 Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script th:src="@{/js/scripts.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

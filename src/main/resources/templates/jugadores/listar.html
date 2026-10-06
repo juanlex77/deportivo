@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Jugadores - Deportivo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">⚽ Deportivo</a>
+            <div class="navbar-nav">
+                <a class="nav-link" th:href="@{/clubes}">Clubes</a>
+                <a class="nav-link" th:href="@{/entrenadores}">Entrenadores</a>
+                <a class="nav-link active" th:href="@{/jugadores}">Jugadores</a>
+                <a class="nav-link" th:href="@{/asociaciones}">Asociaciones</a>
+                <a class="nav-link" th:href="@{/competiciones}">Competiciones</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container mt-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>🏃 Lista de Jugadores</h2>
+            <a th:href="@{/jugadores/crear}" class="btn btn-success">
+                ➕ Nuevo Jugador
+            </a>
+        </div>
+
+        <!-- Mensaje si no hay registros -->
+        <div th:if="${#lists.isEmpty(jugadores)}" class="alert alert-info">
+            No hay jugadores registrados todavía.
+        </div>
+
+        <!-- Tabla de jugadores -->
+        <table class="table table-striped table-hover" th:unless="${#lists.isEmpty(jugadores)}">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Número</th>
+                    <th>Posición</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="jugador, iter : ${jugadores}">
+                    <td th:text="${iter.count}"></td>
+                    <td th:text="${jugador.nombre}"></td>
+                    <td th:text="${jugador.apellido}"></td>
+                    <td>
+                        <span class="badge bg-primary" th:text="'#' + ${jugador.numero}"></span>
+                    </td>
+                    <td th:text="${jugador.posicion}"></td>
+                    <td>
+                        <a th:href="@{/jugadores/editar/{id}(id=${jugador.id})}"
+                           class="btn btn-warning btn-sm">✏️ Editar</a>
+
+                        <a th:href="@{/jugadores/eliminar/{id}(id=${jugador.id})}"
+                           class="btn btn-danger btn-sm btn-eliminar"
+                           th:attr="data-nombre=${jugador.nombre + ' ' + jugador.apellido}">
+                           🗑️ Eliminar
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/}" class="btn btn-secondary mt-3">⬅️ Volver al Inicio</a>
+    </div>
+
+    <!-- Scripts -->
+    <script th:src="@{/js/scripts.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
